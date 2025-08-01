@@ -1,4 +1,4 @@
-package net.louislefebvre;
+package com.github.louislef299.blouis;
 
 public class App {
     public static void main(String[] args) {

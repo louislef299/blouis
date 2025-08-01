@@ -11,9 +11,13 @@ background, I haven't gotten the full Java experience yet, so I'm
 going to force myself to start as the industry started and work
 towards Kotlin to hopefully gain the expertise I need.
 
+For the CLI, I'm planning on using [Airline][].
+
 ## Building & Running
 
 ```bash
 mvn clean package && \
-java -cp ./target/blou-1.0-SNAPSHOT.jar net.louislefebvre.App
+java -cp ./target/blou-1.0-SNAPSHOT.jar com.github.louislef299.blouis/App
 ```
+
+[Airline]: https://rvesse.github.io/airline/

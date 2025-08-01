@@ -1,4 +1,4 @@
-package net.louislefebvre;
+package com.github.louislef299.blouis;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

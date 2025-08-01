@@ -3,12 +3,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>net.louislefebvre</groupId>
+  <groupId>com.github.louislef299.blouis</groupId>
   <artifactId>blou</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>blou</name>
-  <url>https://louislefebvre.net/blouis</url>
+  <url>https://github.com/louislef299/blouis</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
