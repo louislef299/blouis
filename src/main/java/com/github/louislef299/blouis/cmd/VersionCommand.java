@@ -9,20 +9,24 @@ import java.util.Properties;
 public class VersionCommand implements Runnable {
     @Override
     public void run() {
-        String version = getVersion();
-        System.out.println("blou version " + version);
+        Properties props = getBuildProperties();
+        
+        System.out.println("blou version " + props.getProperty("version", "unknown"));
+        System.out.println("Built: " + props.getProperty("build.time", "unknown"));
+        System.out.println("Java: " + props.getProperty("java.version", "unknown"));
+        System.out.println("OS: " + props.getProperty("os.name", "unknown") + " " + props.getProperty("os.arch", "unknown"));
+        System.out.println("Git: " + props.getProperty("git.commit", "unknown") + " (" + props.getProperty("git.branch", "unknown") + ")");
     }
     
-    private String getVersion() {
+    private Properties getBuildProperties() {
+        Properties props = new Properties();
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("version.properties")) {
-            if (input == null) {
-                return "unknown";
+            if (input != null) {
+                props.load(input);
             }
-            Properties props = new Properties();
-            props.load(input);
-            return props.getProperty("version", "unknown");
         } catch (IOException e) {
-            return "unknown";
+            // Return empty properties, getProperty() will return defaults
         }
+        return props;
     }
 }
