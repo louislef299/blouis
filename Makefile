@@ -7,7 +7,7 @@ GRAALVM_PATH = $(GRAALVM_HOME)/bin:$(PATH)
 bin:
 	@echo "Installing GraalVM and building native binary..."
 	@./scripts/install-graalvm.sh
-	
+
 native: bin
 	@echo "Building native binary..."
 	@JAVA_HOME="$(GRAALVM_HOME)" PATH="$(GRAALVM_PATH)" \
@@ -18,6 +18,9 @@ test:
 
 build:
 	@mvn clean package
+
+analyze:
+	@mvn dependency:tree && mvn dependency:analyze
 
 clean:
 	@mvn clean

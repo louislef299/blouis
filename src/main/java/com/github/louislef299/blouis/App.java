@@ -1,16 +1,11 @@
 package com.github.louislef299.blouis;
 
 import com.github.rvesse.airline.Cli;
-import com.github.rvesse.airline.builder.CliBuilder;
-import com.github.louislef299.blouis.cmd.VersionCommand;
+import com.github.louislef299.blouis.builder.BlouCliBuilder;
 
 public class App {
     public static void main(String[] args) {
-        CliBuilder<Runnable> builder = Cli.<Runnable>builder("blou")
-                .withDescription("Blou CLI tool")
-                .withCommand(VersionCommand.class);
-        
-        Cli<Runnable> cli = builder.build();
+        Cli<Runnable> cli = BlouCliBuilder.createDefaultCli();
         
         try {
             Runnable command = cli.parse(args);
