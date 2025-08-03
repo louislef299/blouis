@@ -13,34 +13,31 @@ towards Kotlin to hopefully gain the expertise I need.
 
 For the CLI, I'm planning on using [Airline][].
 
-## Architecture: Builder Factory Pattern
+## Architecture: Builder Pattern
 
-This project uses an explicit Builder Factory pattern instead of relying on framework "magic" for command instantiation.
+This project uses an explicit Builder pattern instead of relying on framework
+"magic" for command instantiation.
 
 ### Why This Approach?
 
-Coming from Go's explicit nature, Java's typical dependency injection and annotation scanning can feel like debugging a black box. This pattern provides:
+Coming from Go's explicit nature, Java's typical dependency injection and
+annotation scanning can feel like debugging a black box. This pattern provides:
 
-- **Explicit command registration** - you can see exactly which commands are available
-- **Type safety** - compile-time validation instead of runtime reflection errors  
+- **Explicit command registration** - you can see exactly which commands are
+  available
+- **Type safety** - compile-time validation instead of runtime reflection errors
 - **Easier debugging** - clear dependency chains without framework magic
-- **Better testing** - ability to create CLI instances with specific command subsets
+- **Better testing** - ability to create CLI instances with specific command
+  subsets
 
 ### How It Works
-
-**CommandFactory** (`factory/CommandFactory.java`):
-
-```java
-public static VersionCommand createVersionCommand() {
-    return new VersionCommand();  // Explicit instantiation
-}
-```
 
 **BlouCliBuilder** (`builder/BlouCliBuilder.java`):
 
 ```java
 Cli<Runnable> cli = new BlouCliBuilder()
     .withVersionCommand()
+    .withHelpCommand()
     .withAllCommands()  // or selectively add commands
     .build();
 ```
@@ -48,9 +45,8 @@ Cli<Runnable> cli = new BlouCliBuilder()
 ### Adding New Commands
 
 1. Create your command class with `@Command` annotation
-2. Add a factory method in `CommandFactory`
-3. Add a builder method in `BlouCliBuilder`
-4. Update `withAllCommands()` to include it
+2. Add a builder method in `BlouCliBuilder`
+3. Update `withAllCommands()` to include it
 
 This keeps the codebase explicit and maintainable while still leveraging Airline's CLI parsing capabilities.
 
