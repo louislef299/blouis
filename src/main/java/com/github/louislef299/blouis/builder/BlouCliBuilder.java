@@ -3,6 +3,7 @@ package com.github.louislef299.blouis.builder;
 import com.github.rvesse.airline.Cli;
 import com.github.rvesse.airline.builder.CliBuilder;
 import com.github.louislef299.blouis.cmd.HelpCommand;
+import com.github.louislef299.blouis.cmd.ScanCommand;
 import com.github.louislef299.blouis.cmd.VersionCommand;
 
 public class BlouCliBuilder {
@@ -20,6 +21,11 @@ public class BlouCliBuilder {
         return this;
     }
     
+    public BlouCliBuilder withScanCommand() {
+        builder.withCommand(ScanCommand.class);
+        return this;
+    }
+    
     public BlouCliBuilder withVersionCommand() {
         builder.withCommand(VersionCommand.class);
         return this;
@@ -27,6 +33,7 @@ public class BlouCliBuilder {
     
     public BlouCliBuilder withAllCommands() {
         return this.withHelpCommand()
+                .withScanCommand()
                 .withVersionCommand();
     }
     
