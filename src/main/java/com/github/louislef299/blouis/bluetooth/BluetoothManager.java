@@ -90,10 +90,14 @@ public class BluetoothManager {
     
     private void displayDevice(BluetoothDevice device, boolean verbose) {
         String name = device.getName();
+        String alias = device.getAlias();
         String address = device.getAddress();
         
+        // Try to get the best available name
+        String displayName = getBestDeviceName(name, alias, address);
+        
         // Display basic info
-        System.out.println("  " + (name != null ? name : "[Unknown Device]") + " (" + address + ")");
+        System.out.println("  " + displayName + " (" + address + ")");
         
         if (verbose) {
             try {
@@ -115,6 +119,58 @@ public class BluetoothManager {
                     System.out.println("    (Some device details unavailable)");
                 }
             }
+        }
+    }
+    
+    private String getBestDeviceName(String name, String alias, String address) {
+        // Priority: name > alias > formatted address
+        if (name != null && !name.trim().isEmpty()) {
+            return name;
+        }
+        if (alias != null && !alias.trim().isEmpty() && !alias.equals(address)) {
+            return alias;
+        }
+        
+        // If no name available, try to make MAC address more readable
+        return formatMacAddress(address);
+    }
+    
+    private String formatMacAddress(String address) {
+        if (address == null) return "[Unknown Device]";
+        
+        // Convert to standard MAC format if needed
+        String formattedMac = address.toUpperCase().replace("-", ":");
+        
+        // Ensure we have a proper MAC address format
+        if (formattedMac.length() < 17) return "[Unknown Device]";
+        
+        // Try to identify manufacturer from OUI (first 3 octets)
+        String oui = formattedMac.substring(0, 8); // First 3 octets: XX:XX:XX
+        String manufacturer = getManufacturerFromOUI(oui);
+        
+        if (manufacturer != null) {
+            return manufacturer + " Device (" + formattedMac.substring(9) + ")"; // Show last 3 octets
+        }
+        
+        return "[Device " + formattedMac.substring(9) + "]"; // Show last 3 octets only
+    }
+    
+    private String getManufacturerFromOUI(String oui) {
+        // Common Bluetooth device manufacturers (partial list)
+        switch (oui) {
+            case "00:15:8A": return "Garmin"; // GPS/fitness devices
+            case "00:C5:85": return "Apple"; // Apple devices  
+            case "80:16:09": return "Sleep Number"; // Smart beds
+            case "CC:6A:10": return "Chamberlain"; // MyQ garage door
+            case "C4:35:34": return "Govee"; // Smart lighting
+            case "3C:95:09": return "Intel"; // Bluetooth adapters
+            case "B8:27:EB": return "Raspberry Pi"; 
+            case "DC:A6:32": return "Raspberry Pi";
+            case "E4:5F:01": return "Raspberry Pi";
+            case "B8:AE:ED": return "Amazon"; // Echo devices
+            case "50:F5:DA": return "Amazon"; // Echo devices
+            case "AC:63:BE": return "Amazon"; // Echo devices
+            default: return null;
         }
     }
     

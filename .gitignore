@@ -29,3 +29,6 @@ replay_pid*
 
 # Maven Shade Plugin
 dependency-reduced-pom.xml
+
+# Claude development session notes
+CLAUDE.md

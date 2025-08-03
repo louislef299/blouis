@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Console appender for general output -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root logger level - set to WARN to reduce noise -->
+    <root level="WARN">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <!-- Bluetooth-related loggers at INFO level for debugging -->
+    <logger name="com.github.hypfvieh.bluetooth" level="INFO" />
+    <logger name="org.freedesktop.dbus" level="WARN" />
+    
+    <!-- Our application logger at DEBUG level -->
+    <logger name="com.github.louislef299.blouis" level="DEBUG" />
+</configuration>
