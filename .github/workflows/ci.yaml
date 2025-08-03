@@ -1,0 +1,40 @@
+---
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Cache Maven dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: Validate project
+      run: mvn validate
+
+    - name: Compile project
+      run: mvn compile
+
+    - name: Run tests
+      run: mvn test
+
+    - name: Package application
+      run: mvn package
+
+    - name: Verify package
+      run: mvn verify
