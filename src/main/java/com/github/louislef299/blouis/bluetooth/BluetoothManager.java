@@ -16,6 +16,10 @@ public class BluetoothManager {
         this.deviceManager = DeviceManager.createInstance(false);
     }
     
+    public DeviceManager getDeviceManager() {
+        return deviceManager;
+    }
+    
     public void checkSystemRequirements(boolean verbose) throws Exception {
         if (verbose) {
             System.out.println("Checking system requirements...");

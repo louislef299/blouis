@@ -11,6 +11,7 @@ public class HelpCommand implements Runnable {
         System.out.println("Usage: blou <command> [options]");
         System.out.println();
         System.out.println("Available commands:");
+        System.out.println("  devices    List paired, trusted, and connected Bluetooth devices");
         System.out.println("  help       Show this help message");
         System.out.println("  scan       Scan for nearby Bluetooth devices");
         System.out.println("  version    Show version information");

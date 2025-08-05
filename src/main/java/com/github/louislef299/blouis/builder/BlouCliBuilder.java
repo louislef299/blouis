@@ -5,6 +5,7 @@ import com.github.rvesse.airline.builder.CliBuilder;
 import com.github.louislef299.blouis.cmd.HelpCommand;
 import com.github.louislef299.blouis.cmd.ScanCommand;
 import com.github.louislef299.blouis.cmd.VersionCommand;
+import com.github.louislef299.blouis.cmd.DevicesCommand;
 
 public class BlouCliBuilder {
     
@@ -31,9 +32,15 @@ public class BlouCliBuilder {
         return this;
     }
     
+    public BlouCliBuilder withDevicesCommand() {
+        builder.withCommand(DevicesCommand.class);
+        return this;
+    }
+    
     public BlouCliBuilder withAllCommands() {
         return this.withHelpCommand()
                 .withScanCommand()
+                .withDevicesCommand()
                 .withVersionCommand();
     }
     
