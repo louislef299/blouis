@@ -44,7 +44,7 @@
     <dependency>
       <groupId>com.github.hypfvieh</groupId>
       <artifactId>dbus-java-transport-native-unixsocket</artifactId>
-      <version>5.1.0</version>
+      <version>5.1.1</version>
     </dependency>
     
     <!-- Logging implementation for SLF4J -->
