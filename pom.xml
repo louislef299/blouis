@@ -39,7 +39,7 @@
     <dependency>
       <groupId>com.github.hypfvieh</groupId>
       <artifactId>bluez-dbus</artifactId>
-      <version>0.3.0</version>
+      <version>0.3.2</version>
     </dependency>
     <dependency>
       <groupId>com.github.hypfvieh</groupId>
